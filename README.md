@@ -16,5 +16,5 @@ This is a simple interface for help our OOP Team-Project to save Scholarship Sys
 - AL-Desouky
 - Khadiga
 
-## Instructor
+## Instructor (Our inspiration)
 #### Under Supervision of: Dr.Mahmoud Safwet.
