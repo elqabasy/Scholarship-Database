@@ -6,3 +6,9 @@ This is a simple interface for help our OOP Team-Project to save Scholarship Sys
 
 ## Used Libraries
 - sqlite3
+
+
+## Team Members
+
+
+#### Under Supervision of: Dr.Mahmoud Safwet.
