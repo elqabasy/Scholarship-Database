@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+# new
+build
+.vscode
+temp
