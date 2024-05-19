@@ -7,7 +7,20 @@ This is a simple interface for help our OOP Team-Project to save Scholarship Sys
 ## Used Libraries
 - sqlite3
 
+## Code Practice (Syntax)
+- ### Vriable naming
+    Kabab case with pre-underscore: ex. for private data in c++
 
+        _expire_date = 0;
+        _create_date = 0;
+ 
+- ### Methods naming
+    camel case:
+
+        getName();
+
+## App
+        - Uing code 
 ## Team Members
 - Mahros AL-Qabasy (TASK CREATOR)
 - Ahmed Yaser Abdelrahman

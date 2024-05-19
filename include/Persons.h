@@ -2,19 +2,11 @@
 #define PERSONS_H
 
 #include "Database.h"
-
 struct Person{
-    string name, education, birth_date;
-    long double english_score;
-    ll int id, nationality_id;
-    Person(ll int idx, string namex, ll int nationality_idx, string birth_datex, string educationx, ld english_scorex){
-        id = idx;
-        name = namex;
-        education = educationx;
-        birth_date = birth_datex;
-        english_score = english_scorex;
-        nationality_id = nationality_idx;
-    }
+    ld _english_score;
+    ll int _id, _nationality_id;
+    string _name, _education, _birth_date;
+    Person(clli& id, cs& name, clli& nationality_id, cs& birth_date, cs& education, cld english_score) : _id(id), _name(name), _nationality_id(nationality_id), _birth_date(birth_date), _education(education), _english_score(english_score){}
 };
 
 class Persons : public Database{
@@ -28,13 +20,15 @@ class Persons : public Database{
         // Functionality
         bool create(cs&, clli&, cs&, cs&, cld&);
 
-        bool remove(cs&);
-        bool remove(clli&);
+        Person read(cs&);
+        Person read(clli&);
 
         bool update(clli&, cs&, clli&, cs&, cs&, cld&);
 
-        Person read(cs&);
-        Person read(clli&);
-};
+        bool remove(cs&);
+        bool remove(clli&);
 
+        // Destructor
+        ~Persons();
+};
 #endif // PERSONS_H

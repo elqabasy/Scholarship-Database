@@ -6,13 +6,9 @@
 using namespace std;
 
 struct BankAccount{
-    ll int id, personID;
-    ld balance;
-    BankAccount(clli& idx, clli& personIDx, cld& balancex){
-        id = idx;
-        balance = balancex;
-        personID = personIDx;
-    }
+    ld _balance;
+    lli _id, _person_id;
+    BankAccount(clli& id, clli& person_id, cld& balance) :_id(id),  _person_id(person_id),  _balance(balance) {}
 };
 
 class BankAccounts : public Database{
@@ -26,11 +22,15 @@ class BankAccounts : public Database{
         // Functionality
         bool create(clli&, cld&);
 
-        bool remove(clli&);
+        BankAccount read(clli&);
 
         bool update(clli&, cld&);
 
-        BankAccount read(clli&);
-};
+        bool remove(clli&);
 
+        // Destructor
+        ~BankAccounts();
+};
 #endif
+
+

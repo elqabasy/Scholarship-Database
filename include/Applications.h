@@ -1,19 +1,10 @@
 #ifndef APPLICATIONS_H
 #define APPLICATIONS_H
 
-#include <sqlite3.h>
 #include <iostream>
+#include <sqlite3.h>
 #include "Database.h"
 using namespace std;
-
-#define l long
-// #define endl '\n';
-#define ll long long
-#define cld const ld
-#define ld long double
-#define cs const string
-#define clli const ll int
-
 
 struct Application{
     ll int id, personID, scholarshipID, statusID;
@@ -35,7 +26,7 @@ class Applications : public Database{
         // Constructor
         Applications();
 
-        // Functionality
+        // CRUD Operations
         bool create(clli&, clli&, clli&);
 
         Application read(clli&);
@@ -43,5 +34,13 @@ class Applications : public Database{
         bool update(clli&, clli&, clli&, clli&);
 
         bool remove(clli&);
+
+        // Destructor
+        ~Applications();
 };
 #endif
+
+
+/* Next Features
+    - Getters for every member data by ApplicationID
+*/

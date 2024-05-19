@@ -3,12 +3,12 @@
 // Static members
 sqlite3* Database::_database = nullptr;
 
-// Constructor
+/* Constructor*/
 Database::Database(){
     
 }
 
-// Functionality
+/* Functionality */
 bool Database::open(const string& filename){
     if (sqlite3_open(filename.c_str(), &_database)) {
         _error = "Can't open database: ";
@@ -18,6 +18,7 @@ bool Database::open(const string& filename){
     }
     return true;
 }
+
 bool Database::execute(const string& sql){
     char* zErrMsg = nullptr;
     if (sqlite3_exec(_database, sql.c_str(), nullptr, nullptr, &zErrMsg) != SQLITE_OK) {

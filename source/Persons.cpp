@@ -1,10 +1,14 @@
 #include "../include/Persons.h"
 
+
+/* Constructor */
 Persons::Persons(){
     _database = database();
 }
 
-bool Persons::create(cs& name, clli& nationalityID, cs& birthDate, cs& education, cld& englishScore) {
+
+/* Functionality */
+bool Persons::create(cs& name, clli& nationality_id, cs& birth_date, cs& education, cld& english_score) {
     const string query = "INSERT INTO " + _name + " (name, nationality_id, birth_date, education, english_score) VALUES (?, ?, ?, ?, ?);";
     
     sqlite3_stmt* stmt = nullptr;
@@ -17,10 +21,10 @@ bool Persons::create(cs& name, clli& nationalityID, cs& birthDate, cs& education
     }
 
     sqlite3_bind_text(stmt, 1, name.c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_int(stmt, 2, nationalityID);
-    sqlite3_bind_text(stmt, 3, birthDate.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_int(stmt, 2, nationality_id);
+    sqlite3_bind_text(stmt, 3, birth_date.c_str(), -1, SQLITE_STATIC);
     sqlite3_bind_text(stmt, 4, education.c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_double(stmt, 5, englishScore);
+    sqlite3_bind_double(stmt, 5, english_score);
 
     if (sqlite3_step(stmt) != SQLITE_DONE) {
         _error = "Error executing statement: ";
@@ -32,78 +36,6 @@ bool Persons::create(cs& name, clli& nationalityID, cs& birthDate, cs& education
 
     sqlite3_finalize(stmt);
     return true;
-}
-
-bool Persons::remove(cs& name){
-    char* messageError;
-    const string sql = "DELETE FROM " + _name + " WHERE name = " + name + ";";
-
-    int exit = sqlite3_exec(_database, sql.c_str(), NULL, 0, &messageError);
-
-    if (exit != SQLITE_OK) {
-        cerr << "Error Deleting Record" << endl;
-        sqlite3_free(messageError);
-        return false;
-    } else {
-        return true;
-    }
-}
-bool Persons::remove(clli& id){
-    char* messageError;
-    const string sql = "DELETE FROM " + _name + " WHERE ID = " + to_string(id) + ";";
-
-    int exit = sqlite3_exec(_database, sql.c_str(), NULL, 0, &messageError);
-
-    if (exit != SQLITE_OK) {
-        cerr << "Error Deleting Record" << endl;
-        sqlite3_free(messageError);
-        return false;
-    } else {
-        return true;
-    }
-}
-
-bool Persons::update(clli& id, cs& newName = "-1", clli& newNationalityID = -1, cs& newBirthDate = "-1", cs& newEducation = "-1", cld& newEnglishScore = -1){
-    const string sql = "UPDATE " + _name + " SET name = ?, nationality_id = ?, birth_date = ?, education = ?, english_score = ? WHERE ID = ?;";
-    sqlite3_stmt *stmt;
-    
-    if (sqlite3_prepare_v2(_database, sql.c_str(), -1, &stmt, 0) != SQLITE_OK) {
-        cerr << "Error Preparing Statement" << endl;
-        return false;
-    }
-
-    if(newName != "-1"){
-        sqlite3_bind_text(stmt, 1, newName.c_str(), -1, SQLITE_STATIC);
-    }
-    if(newNationalityID != -1){
-        sqlite3_bind_int64(stmt, 2, newNationalityID);
-    }
-    if(newBirthDate != "-1"){
-        sqlite3_bind_text(stmt, 3, newBirthDate.c_str(), -1, SQLITE_STATIC);
-    }
-
-    if(newEducation != "-1"){
-        sqlite3_bind_text(stmt, 4, newEducation.c_str(), -1, SQLITE_STATIC);    
-    }
-
-    if(newEnglishScore != -1){
-        sqlite3_bind_double(stmt, 5, newEnglishScore);
-    }
-
-
-    sqlite3_bind_int64(stmt, 6, id);
-
-    int exit = sqlite3_step(stmt);
-
-    if (exit != SQLITE_DONE) {
-        cerr << "Error Updating Record" << endl;
-        sqlite3_finalize(stmt);
-        return false;
-    } else {
-        // cout << "Record Updated Successfully!" << endl;
-        sqlite3_finalize(stmt);
-        return true;
-    }
 }
 
 Person Persons::read(clli& id){
@@ -146,4 +78,81 @@ Person Persons::read(cs& name){
     }
     sqlite3_finalize(stmt);
     return Person(-1, "", -1, "", "", -1);
+}
+
+bool Persons::update(clli& id, cs& new_name = "-1", clli& new_nationality_id = -1, cs& new_birth_date = "-1", cs& new_education = "-1", cld& new_english_score = -1){
+    const string sql = "UPDATE " + _name + " SET name = ?, nationality_id = ?, birth_date = ?, education = ?, english_score = ? WHERE ID = ?;";
+    sqlite3_stmt *stmt;
+    
+    if (sqlite3_prepare_v2(_database, sql.c_str(), -1, &stmt, 0) != SQLITE_OK) {
+        cerr << "Error Preparing Statement" << endl;
+        return false;
+    }
+
+    if(new_name != "-1"){
+        sqlite3_bind_text(stmt, 1, new_name.c_str(), -1, SQLITE_STATIC);
+    }
+    if(new_nationality_id != -1){
+        sqlite3_bind_int64(stmt, 2, new_nationality_id);
+    }
+    if(new_birth_date != "-1"){
+        sqlite3_bind_text(stmt, 3, new_birth_date.c_str(), -1, SQLITE_STATIC);
+    }
+
+    if(new_education != "-1"){
+        sqlite3_bind_text(stmt, 4, new_education.c_str(), -1, SQLITE_STATIC);    
+    }
+
+    if(new_english_score != -1){
+        sqlite3_bind_double(stmt, 5, new_english_score);
+    }
+
+
+    sqlite3_bind_int64(stmt, 6, id);
+
+    int exit = sqlite3_step(stmt);
+
+    if (exit != SQLITE_DONE) {
+        cerr << "Error Updating Record" << endl;
+        sqlite3_finalize(stmt);
+        return false;
+    } else {
+        // cout << "Record Updated Successfully!" << endl;
+        sqlite3_finalize(stmt);
+        return true;
+    }
+}
+
+bool Persons::remove(cs& name){
+    char* messageError;
+    const string sql = "DELETE FROM " + _name + " WHERE name = " + name + ";";
+
+    int exit = sqlite3_exec(_database, sql.c_str(), NULL, 0, &messageError);
+
+    if (exit != SQLITE_OK) {
+        cerr << "Error Deleting Record" << endl;
+        sqlite3_free(messageError);
+        return false;
+    } else {
+        return true;
+    }
+}
+bool Persons::remove(clli& id){
+    char* messageError;
+    const string sql = "DELETE FROM " + _name + " WHERE ID = " + to_string(id) + ";";
+
+    int exit = sqlite3_exec(_database, sql.c_str(), NULL, 0, &messageError);
+
+    if (exit != SQLITE_OK) {
+        cerr << "Error Deleting Record" << endl;
+        sqlite3_free(messageError);
+        return false;
+    } else {
+        return true;
+    }
+}
+
+// Destructor
+Persons::~Persons(){
+
 }

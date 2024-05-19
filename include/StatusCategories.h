@@ -4,12 +4,9 @@
 #include "Database.h"
 
 struct StatusCategory{
-    ll int id;
-    string name;
-    StatusCategory(clli& idx, cs& namex){
-        id = idx;
-        name = namex;
-    }
+    lli _id;
+    string _name;
+    StatusCategory(clli& id, cs& name) : _id(id), _name(name) {}
 };
 
 class StatusCategories : public Database{
@@ -28,6 +25,9 @@ class StatusCategories : public Database{
         bool update(clli&, cs&);
 
         bool remove(clli&);
-};
 
+        // Destructor
+        ~StatusCategories();
+
+};
 #endif // STATUS_CATEGORIES_H

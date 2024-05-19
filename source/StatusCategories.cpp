@@ -1,10 +1,12 @@
 #include "../include/StatusCategories.h"
 
 
+/* Constructor */
 StatusCategories::StatusCategories(){
     _database = database();
 }
 
+/* Functionality */
 bool StatusCategories::create(cs& name){
     const string query = "INSERT INTO " + _name + " (name) VALUES (?);";
     
@@ -54,7 +56,7 @@ bool StatusCategories::remove(clli& id){
     }
 }
 
-bool StatusCategories::update(clli& id, cs& newName){
+bool StatusCategories::update(clli& id, cs& new_name){
     const string sql = "UPDATE " + _name + " SET name = ? WHERE ID = ?;";
     sqlite3_stmt *stmt;
     
@@ -63,7 +65,7 @@ bool StatusCategories::update(clli& id, cs& newName){
         return false;
     }
 
-    sqlite3_bind_text(stmt, 1, newName.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 1, new_name.c_str(), -1, SQLITE_STATIC);
     sqlite3_bind_int64(stmt, 2, id);
 
     int exit = sqlite3_step(stmt);
@@ -92,4 +94,10 @@ StatusCategory StatusCategories::read(clli& id){
     }
     sqlite3_finalize(stmt);
     return StatusCategory(-1, "");
+}
+
+
+// Destructor
+StatusCategories::~StatusCategories(){
+
 }
