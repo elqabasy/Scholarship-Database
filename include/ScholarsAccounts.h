@@ -4,14 +4,9 @@
 #include "Database.h"
 
 struct Scholar{
-    ll int id, personID;
-    string username, password;
-    Scholar(clli& idx, clli& personIDx, cs& usernamex, cs& passwordx){
-        id = idx;
-        personID = personIDx;
-        username = usernamex;
-        password = passwordx;
-    }
+    lli _id, _person_id;
+    string _username, _password;
+    Scholar(clli& id, clli& person_id, cs& username, cs& password) : _id(id), _person_id(person_id), _username(username), _password(password){}
 };
 
 class Scholars : public Database{
@@ -25,13 +20,16 @@ class Scholars : public Database{
         // Functionality
         bool create(clli&, cs&, cs&);
 
-        bool remove(cs&);
-        bool remove(clli&);
+        Scholar read(cs&);
+        Scholar read(clli&);
 
         bool update(clli&, cs&, cs&);
 
-        Scholar read(cs&);
-        Scholar read(clli&);
+        bool remove(cs&);
+        bool remove(clli&);
+
+        // Destructor
+        ~Scholars();
 };
 
 #endif // SCHOLARS_ACCOUNTS_H

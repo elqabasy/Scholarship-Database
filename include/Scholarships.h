@@ -4,16 +4,10 @@
 #include "Database.h"
 
 struct Scholarship{
-    ld budget;
-    ll int id, fieldID;
-    string description, degree;
-    Scholarship(clli& idx, cs& descriptionx, clli& fieldIDx, cld& budgetx, cs& degreex){
-        id = idx;
-        budget = budgetx;
-        degree = degreex;
-        fieldID = fieldIDx;
-        description = descriptionx;
-    }
+    ld _budget;
+    lli _id, _field_id;
+    string _description, _degree;
+    Scholarship(clli& id, cs& description, clli& field_id, cld& budget, cs& degree) : _id(id), _description(description), _field_id(field_id), _budget(budget), _degree(degree) {}
 };
 
 class Scholarships : public Database{
@@ -32,5 +26,8 @@ class Scholarships : public Database{
         bool update(clli&, cs&, clli&, cld&, cs&);
 
         bool remove(clli&);
+
+        // Constructor
+        ~Scholarships();
 };
 #endif // SCHOLARSHIPS_H

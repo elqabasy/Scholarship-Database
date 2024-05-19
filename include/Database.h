@@ -15,6 +15,7 @@ using namespace std;
 #define ld long double
 #define cs const string
 #define clli const ll int
+#define lli long long int
 
 // database.h
 class Database {

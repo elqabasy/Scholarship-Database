@@ -6,13 +6,9 @@
 using namespace std;
 
 struct Field{
-    ll int id;
-    string name, description;
-    Field(clli& idx, cs& namex, cs& descriptionx){
-        id = idx;
-        name = namex;
-        description = descriptionx;
-    }
+    ll int _id;
+    string _name, _description;
+    Field(clli& id, cs& name, cs& description) : _id(id), _name(name), _description(description){}
 };
 
 class Fields : public Database{
@@ -31,7 +27,8 @@ class Fields : public Database{
         bool update(clli&, cs&, cs&);
 
         bool remove(clli&);
+        
+        // Destructor
+        ~Fields();
 };
-
-
 #endif // FIELDS_H

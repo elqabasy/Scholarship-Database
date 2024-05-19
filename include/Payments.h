@@ -4,16 +4,10 @@
 #include "Database.h"
 
 struct Payment{
-    ld amount;
-    string createDate;
-    ll int id, scholarshipID, bankAccountID;
-    Payment(clli& idx, clli& scholarshipIDx, clli& bankAccountIDx, cld& amountx, cs& createDatex){
-        id = idx;
-        amount = amountx;
-        createDate = createDatex;
-        scholarshipID = scholarshipIDx;
-        bankAccountID = bankAccountIDx;
-    }
+    ld _amount;
+    string _createDate;
+    ll int _id, _scholarshipID, _bankAccountID;
+    Payment(clli& id, clli& schoID, clli& bankID, cld& amount, cs& createDate) : _id(id), _scholarshipID(schoID), _bankAccountID(bankID), _createDate(createDate), _amount(amount){}
 };
 
 class Payments : public Database{
@@ -25,6 +19,7 @@ class Payments : public Database{
         Payments();
 
         // Functionality
+        /* CRUD Operations approach*/
         bool create(clli&, clli&, cld&);
 
         Payment read(clli&);
@@ -32,6 +27,10 @@ class Payments : public Database{
         bool update(clli&, cld&);
 
         bool remove(clli&);
+
+        // Destructor
+        ~Payments();
+
 };
 
 #endif // PAYMENTS_H

@@ -6,19 +6,24 @@
 class Nationalities : public Database{
     private:
         sqlite3* _database;
-        const string _name = "Nationalities";
+        cs& _name = "Nationalities";
     public:
         // Constructor
         Nationalities();
 
         // Functionality
-        bool create(const string&);
-        bool remove(const string&);
-        bool remove(const ll int&);
-        bool update(const ll int&, const string&);
+        bool create(cs&);
 
-        string read(const ll int&);
-        ll int read(const string&);
+        lli read(cs&);
+        string read(clli&);
+
+        bool update(clli&, cs&);
+
+        bool remove(cs&);
+        bool remove(clli&);
+
+        /* Destructor */
+        ~Nationalities();
 };
 
 #endif // NATIONALITIES_H
