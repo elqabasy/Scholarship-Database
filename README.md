@@ -31,3 +31,4 @@ This is a simple interface for help our OOP Team-Project to save Scholarship Sys
 
 ## Instructor (Our inspiration)
 #### Under Supervision of: Dr.Mahmoud Safwet.
+- He studied in England and has extensive experience in this field.
